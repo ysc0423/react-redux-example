@@ -6,13 +6,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import CompressionPlugin from 'compression-webpack-plugin';
 
-const GLOBALS = {
-    'process.env.NODE_ENV': JSON.stringify('production')
-};
-
 module.exports = {
-    // devtool: 'eval',
-    devtool: 'source-map',
+    devtool: 'eval',
     entry: './scripts/index.js',
     output: {
         path: path.join(__dirname, 'dist'),
@@ -48,23 +43,7 @@ module.exports = {
         browsers: ['last 2 versions']
     })],
     plugins: [
-        new ExtractTextPlugin("site.css"),
-        new webpack.DefinePlugin(GLOBALS),
-        new webpack.optimize.OccurenceOrderPlugin(),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            }
-        }),
-        new webpack.optimize.AggressiveMergingPlugin(),
-        new CompressionPlugin({
-            asset: "[path].gz[query]",
-            algorithm: "gzip",
-            test: /\.js$|\.css$|\.html$/,
-            threshold: 10240,
-            minRatio: 0.8
-        })
+        new ExtractTextPlugin("site.css")
     ],
     externals: {
         //'react': 'React'
