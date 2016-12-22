@@ -12,10 +12,18 @@ const GLOBALS = {
 
 module.exports = {
     devtool: 'source-map',
-    entry: './scripts/index.js',
+    entry: {
+      app: './scripts/index.js',
+      vendor: [
+        'react',
+        'react-dom'
+      ]
+    },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'
+        publicPath: './dist/',
+        filename: 'bundle.js',
+        chunkFilename: "[name].chunk.js"
     },
     module: {
         loaders: [{
@@ -63,7 +71,8 @@ module.exports = {
             test: /\.js$|\.css$|\.html$/,
             threshold: 10240,
             minRatio: 0.8
-        })
+        }),
+       new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
     ],
     externals: {
         //'react': 'React'

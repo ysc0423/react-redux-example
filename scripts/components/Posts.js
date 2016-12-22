@@ -7,7 +7,10 @@ const Posts = (props) => {
   if(isLoading){
     return (<div>I am loading...</div>)
   }else{
-    return (<div>{posts.length} Posts</div>)
+    return (
+      <div>
+        <div>{posts.length} Posts</div>
+      </div>)
   }
 }
 
