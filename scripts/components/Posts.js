@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '../assests/site.scss';
 
 const Posts = (props) => {
   const {posts, isLoading} = props;
