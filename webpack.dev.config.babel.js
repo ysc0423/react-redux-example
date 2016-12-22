@@ -8,10 +8,18 @@ import CompressionPlugin from 'compression-webpack-plugin';
 
 module.exports = {
     devtool: 'eval',
-    entry: './scripts/index.js',
+    entry: {
+      app: './scripts/index.js',
+      vendor: [
+        'react',
+        'react-dom'
+      ]
+    },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'bundle.js'
+        publicPath: './dist/',
+        filename: 'bundle.js',
+        chunkFilename: "[name].chunk.js"
     },
     module: {
         loaders: [{
@@ -43,7 +51,8 @@ module.exports = {
         browsers: ['last 2 versions']
     })],
     plugins: [
-        new ExtractTextPlugin("site.css")
+        new ExtractTextPlugin("site.css")，
+        new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
     ],
     externals: {
         //'react': 'React'
